@@ -1,0 +1,11 @@
+name: check mode&npm versions
+on:
+  push:
+    branches:
+      - main
+jobs:
+  first-job:
+    runs-on: windows-latest
+    steps:
+    - run: node -v
+    - run: npm -v
