@@ -1,15 +1,21 @@
-name: check mode&npm versions
+name: run node app
 on:
   push:
     branches:
       - node-app-1
 jobs:
   first-job:
+    name: build and run the node project
     runs-on: ubuntu-latest
     container: node:16
     steps:
       - run: node -v
+        name: check node version
       - run: npm -v
+        name: check npm version
       - uses: actions/checkout@v3
+        name: copy the files from github repo
       - run: npm i
+        name: install dependencies
       - run: node app.js
+        name: run the application
