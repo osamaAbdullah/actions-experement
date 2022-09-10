@@ -2,7 +2,7 @@ name: build the image and push to docker hub
 on:
   push:
     branches:
-      - push_to_docker_hub
+      - test_file
 jobs:
   build-and-push:
     name: Build Image
@@ -18,9 +18,11 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_KEY }}
 
-      - name: build and push the image
-        uses: docker/build-push-action@v2
+      - name: build and push php image
+        uses: docker/build-push-action@v3
         with:
           context: .
+          secrets: |
+            "DB_PASSWORD=${{ secrets.DB_PASSWORD }}"
           push: true
-          tags: osama3akre/hello-world:3.1.11, osama3akre/hello-world:git-n-${{ github.run_number }}
+          tags: erbilcenter/test:${{ github.run_number }}
